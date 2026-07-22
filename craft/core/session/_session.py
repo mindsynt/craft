@@ -5,8 +5,14 @@ from __future__ import annotations
 import json
 import time
 import uuid
+import fnmatch
 from pathlib import Path
 from craft.config import CONFIG_DIR
+
+
+def wildcard_match(tool_id: str, pattern: str) -> bool:
+    """Simple wildcard/glob matching for permission patterns."""
+    return fnmatch.fnmatch(tool_id, pattern)
 
 
 class Session:

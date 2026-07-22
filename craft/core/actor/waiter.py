@@ -14,6 +14,8 @@ from craft.core.actor.schema import (
     ActorStatus,
     ActorTime,
     Lifecycle,
+)
+from craft.core.actor.return_header import (
     ReturnStatus,
     parse_return_header,
 )

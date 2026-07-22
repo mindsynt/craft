@@ -1,6 +1,7 @@
 """
 Actor 运行时 — 移植自 packages/opencode/src/actor/
-并发参与者模型, 包含: schema, events, registry, spawn, turn, waiter, group
+并发参与者模型, 包含: schema, events, registry, spawn_ref, return_header,
+spawn, turn, waiter, group
 """
 
 from __future__ import annotations
@@ -14,11 +15,8 @@ from craft.core.actor.schema import (
     ContextMode,
     Liveness,
     Lifecycle,
-    ParsedReturnHeader,
-    ReturnStatus,
     SpawnMode,
     derive_liveness,
-    parse_return_header,
 )
 from craft.core.actor.events import (
     ActorRegistered,
@@ -26,8 +24,17 @@ from craft.core.actor.events import (
     ActorStatusChanged,
     ActorStuck,
 )
-from craft.core.actor.spawn import (
+from craft.core.actor.spawn_ref import (
     SpawnRef,
+)
+from craft.core.actor.return_header import (
+    RETURN_STATUSES,
+    ParsedReturnHeader,
+    ReturnStatus,
+    parse_return_header,
+)
+from craft.core.actor.spawn import (
+    SpawnRef as _deprecated_spawnref,  # back-compat
 )
 from craft.core.actor.registry import (
     ActorRecord,
@@ -57,11 +64,15 @@ from craft.core.actor.core import (
 __all__ = [
     # schema
     "DEFAULT_LIVENESS_STALL_MS", "ActorInfo", "ActorOutcome", "ActorStatus",
-    "ActorTime", "ContextMode", "Liveness", "Lifecycle", "ParsedReturnHeader",
-    "ReturnStatus", "SpawnMode", "derive_liveness", "parse_return_header",
+    "ActorTime", "ContextMode", "Liveness", "Lifecycle", "SpawnMode",
+    "derive_liveness",
     # events
     "ActorRegistered", "ActorStalled", "ActorStatusChanged", "ActorStuck",
-    # spawn
+    # spawn_ref
+    "SpawnRef",
+    # return_header
+    "RETURN_STATUSES", "ParsedReturnHeader", "ReturnStatus", "parse_return_header",
+    # spawn (back-compat)
     "SpawnRef",
     # registry
     "ActorRecord", "ActorRegistry", "ActorRegistryInterface",

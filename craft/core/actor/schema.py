@@ -1,11 +1,12 @@
 """
 类型定义 — 移植自 packages/opencode/src/actor/schema.ts
+
+注意：ReturnHeader 相关类型已移至 return_header 模块。
 """
 
 from __future__ import annotations
 
 import enum
-import re
 import time
 from dataclasses import dataclass, field
 
@@ -104,33 +105,3 @@ def derive_liveness(
     if actor.last_outcome == ActorOutcome.CANCELLED:
         return Liveness.CANCELLED
     return Liveness.IDLE
-
-
-# ═══════════════════════════════════════════════════════════
-# Return Header (return-header.ts)
-# ═══════════════════════════════════════════════════════════
-
-RETURN_STATUSES = ["success", "partial", "failed", "blocked"]
-ReturnStatus = str  # "success" | "partial" | "failed" | "blocked"
-
-
-@dataclass
-class ParsedReturnHeader:
-    status: ReturnStatus | None = None
-    summary: str | None = None
-
-
-STATUS_RE = re.compile(r"^\s*\*\*Status\*\*:\s*(success|partial|failed|blocked)\b", re.IGNORECASE | re.MULTILINE)
-SUMMARY_RE = re.compile(r"\*\*Summary\*\*:\s*(.+)$", re.IGNORECASE | re.MULTILINE)
-
-
-def parse_return_header(final_text: str | None) -> ParsedReturnHeader:
-    """解析 **Status**/**Summary** 头部 — 移植自 return-header.ts parseReturnHeader"""
-    if not final_text:
-        return ParsedReturnHeader()
-    status_match = STATUS_RE.search(final_text)
-    summary_match = SUMMARY_RE.search(final_text)
-    return ParsedReturnHeader(
-        status=status_match.group(1).lower() if status_match else None,
-        summary=summary_match.group(1).strip() if summary_match else None,
-    )

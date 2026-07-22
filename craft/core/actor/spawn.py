@@ -1,28 +1,12 @@
 """
-生成 — 移植自 packages/opencode/src/actor/spawn-ref.ts
+生成 — 移植自 packages/opencode/src/actor/spawn.ts
+
+注意：spawn-ref 已移至独立模块 spawn_ref.py
+SpawnRef 在此保留为兼容导入。
 """
 
 from __future__ import annotations
 
-import threading
-from typing import Any
+from craft.core.actor.spawn_ref import SpawnRef
 
-
-_current_spawn_service: threading.local = threading.local()
-
-
-class SpawnRef:
-    """Spawn 引用 — 移植自 spawn-ref.ts"""
-
-    @staticmethod
-    def get() -> Any | None:
-        return getattr(_current_spawn_service, "value", None)
-
-    @staticmethod
-    def set(value: Any) -> None:
-        _current_spawn_service.value = value
-
-    @staticmethod
-    def clear() -> None:
-        if hasattr(_current_spawn_service, "value"):
-            del _current_spawn_service.value
+__all__ = ["SpawnRef"]
