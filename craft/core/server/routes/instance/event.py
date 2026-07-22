@@ -11,6 +11,8 @@ import logging
 import os
 from typing import Any
 
+from craft.core.server.event import global_bus
+
 logger = logging.getLogger(__name__)
 
 # 事件队列容量
@@ -26,14 +28,16 @@ class EventRoutes:
     @staticmethod
     async def subscribe(request: Any) -> Any:
         """GET /event
-        
+
         SSE 事件流。
         """
         logger.info("Event connected")
 
         async def event_generator():
+            # 发送连接事件
             yield _sse_json({"type": "server.connected", "properties": {}})
 
+            # 每 10 秒发心跳
             while True:
                 await asyncio.sleep(10)
                 yield _sse_json({"type": "server.heartbeat", "properties": {}})

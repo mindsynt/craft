@@ -5,6 +5,7 @@ OTel 风格的请求追踪辅助工具。
 
 from __future__ import annotations
 
+import json
 import logging
 import re
 from typing import Any, Callable
@@ -47,12 +48,27 @@ def request_attributes(request: Any) -> dict[str, str]:
     return attributes
 
 
+async def run_request(name: str, request: Any, effect: Any) -> Any:
+    """运行并追踪一个 Effect 风格的操作
+
+    对应 TS runRequest()
+    """
+    # Simplified implementation: just call the effect
+    attribs = request_attributes(request)
+    logger.debug("Request trace", extra={"name": name, "attributes": attribs})
+    if callable(effect):
+        result = effect()
+        if hasattr(result, "__await__"):
+            result = await result
+        return result
+    return effect
+
+
 async def json_response(request: Any, data: Any) -> Any:
     """构造 JSON 响应
 
     对应 TS jsonRequest 的简化版本
     """
-    import json
     body = json.dumps(data) if data is not None else ""
     return type("Response", (), {
         "status": 200,
@@ -60,3 +76,12 @@ async def json_response(request: Any, data: Any) -> Any:
         "headers": {"Content-Type": "application/json"},
         "content_type": "application/json",
     })()
+
+
+async def json_request(name: str, request: Any, effect_fn: Any) -> Any:
+    """运行 Effect 并返回 JSON 响应
+
+    对应 TS jsonRequest()
+    """
+    result = await run_request(name, request, effect_fn)
+    return await json_response(request, result)

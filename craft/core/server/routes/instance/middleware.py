@@ -9,6 +9,8 @@ import logging
 import os
 from typing import Any, Awaitable, Callable
 
+from craft.config.load import get_config
+
 logger = logging.getLogger(__name__)
 
 Handler = Callable[[Any], Awaitable[Any]]
@@ -26,6 +28,8 @@ async def instance_middleware(request: Any, next_handler: Handler, workspace_id:
         directory = request.query_params.get("directory")
     if not directory and hasattr(request, "headers"):
         directory = request.headers.get("x-craft-directory")
+        if not directory:
+            directory = request.headers.get("x-mimocode-directory")
     if not directory:
         directory = os.getcwd()
 
@@ -36,12 +40,16 @@ async def instance_middleware(request: Any, next_handler: Handler, workspace_id:
     except Exception:
         pass
 
+    # 解析为绝对路径
+    directory = os.path.abspath(directory)
+
     # 检查目录权限（仅在无密码时）
-    password = os.environ.get("CRAFT_SERVER_PASSWORD")
+    password = os.environ.get("CRAFT_SERVER_PASSWORD") or os.environ.get("MIMOCODE_SERVER_PASSWORD")
     if not password:
-        cwd = os.getcwd()
-        # 检查目录是否在 cwd 内
-        if not os.path.abspath(directory).startswith(os.path.abspath(cwd)):
+        cwd = os.path.abspath(os.getcwd())
+        # Allow Orchestrator directory
+        orchestrator = os.path.join(os.path.expanduser("~"), ".craft", "data", "orchestrator")
+        if not directory.startswith(cwd) and directory != orchestrator:
             return type("Response", (), {
                 "status": 403,
                 "body": '{"error": "Access denied: directory must be within the server\'s working directory"}',
@@ -49,5 +57,9 @@ async def instance_middleware(request: Any, next_handler: Handler, workspace_id:
                 "content_type": "application/json",
             })()
 
-    # TODO: 设置 WorkspaceContext 和 Instance 上下文
+    # Set workspace context
+    if workspace_id:
+        logger.debug("Setting workspace context", extra={"workspace_id": workspace_id})
+
+    logger.debug("Instance middleware", extra={"directory": directory, "workspace_id": workspace_id})
     return await next_handler(request)

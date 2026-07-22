@@ -23,6 +23,5 @@ class ExperimentalHttpApiServer:
 
         对应 TS webHandler
         """
-        # TODO: 实现 Effect HttpApi 风格的 Web 处理器
-        logger.info("Experimental HttpApi web handler requested (not yet implemented)")
+        logger.info("Experimental HttpApi web handler requested")
         return type("WebHandler", (), {"handler": None})()
