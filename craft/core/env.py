@@ -11,6 +11,11 @@ from typing import Any
 
 
 class Env:
+    """环境管理器 — 对应 TS 的 Env Service
+
+    支持 get/set/remove/all 操作，以及运行时信息检测。
+    """
+
     def __init__(self):
         self._cache: dict[str, Any] = {}
 
@@ -26,6 +31,14 @@ class Env:
     def is_set(self, key: str) -> bool:
         val = os.environ.get(key, "").lower()
         return val in ("1", "true", "yes", "y")
+
+    def remove(self, key: str):
+        """移除环境变量"""
+        os.environ.pop(key, None)
+
+    def all(self) -> dict[str, str]:
+        """获取所有环境变量"""
+        return dict(os.environ)
 
     @property
     def is_dev(self) -> bool:
