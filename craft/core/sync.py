@@ -138,7 +138,7 @@ class EventStore:
 
     def _save(self):
         CONFIG_DIR.mkdir(parents=True, exist_ok=True)
-        Path(self._db_path).write_text(json.dumps({
+        _Path(self._db_path).write_text(json.dumps({
             "events": self._events[-1000:],
             "sequences": [{"aggregate_id": k, "seq": v} for k, v in self._sequences.items()],
         }, indent=2, default=str))

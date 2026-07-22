@@ -64,7 +64,7 @@ def _generate(prefix: str, direction: Literal["ascending", "descending"], timest
         now = ~now & ((1 << 48) - 1)  # 取反保持48位
 
     # 编码为6字节hex
-    time_hex = format(now, "012x")[:12]
+    time_hex = format(now, "012x")[-12:]
     random_part = _random_base62(ID_LENGTH - 12)
     return f"{prefix}_{time_hex}{random_part}"
 

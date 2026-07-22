@@ -73,36 +73,26 @@ def detect_vcs(path: str | Path) -> str:
 class WorkspaceTrust:
     """工作区信任管理 — 防止对系统目录的意外操作"""
 
-    # 系统级保护目录
+    # 系统级保护目录（操作这些目录需要确认）
     SYSTEM_PATHS: set[str] = {
         "/", "/etc", "/bin", "/sbin", "/usr", "/var",
         "/System", "/Library", "/Applications",
     }
 
-    # HOME 下的保护目录名
-    PROTECTED_HOME_DIRS: set[str] = {
-        "Desktop", "Documents", "Downloads", "Pictures",
-        "Music", "Movies", "Applications", "Library",
-        "Public", ".ssh", ".gnupg",
-    }
-
     @staticmethod
     def is_trusted(path: str | Path) -> bool:
-        """检查路径是否受信任"""
+        """检查路径是否受信任
+
+        仅检查是否为系统级目录。HOME 下的保护目录由
+        get_protected_paths() 处理，不在此处拦截。
+        """
         p = Path(path).resolve()
-        # 永远不信任系统目录
+        original = str(path)
         for sp in WorkspaceTrust.SYSTEM_PATHS:
+            if original == sp or original.startswith(sp + "/"):
+                return False
             if str(p) == sp or str(p).startswith(sp + "/"):
                 return False
-        # 检查 HOME 下的保护目录
-        home = Path.home()
-        try:
-            relative = p.relative_to(home)
-            parts = relative.parts
-            if parts and parts[0] in WorkspaceTrust.PROTECTED_HOME_DIRS:
-                return False
-        except ValueError:
-            pass
         return True
 
 
