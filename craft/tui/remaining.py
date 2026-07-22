@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from textual.containers import Horizontal, Vertical, VerticalScroll
 from textual.screen import ModalScreen
-from textual.widgets import Button, Input, Label, Static, ListView, ListItem, Select, TextArea
+from textual.widgets import Button, Label, Static, ListView, ListItem, Select, TextArea
 
 
 # ─── 首页提示 (移植 ui/home/tips.tsx + tips-view.tsx) ─

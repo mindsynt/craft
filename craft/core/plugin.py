@@ -8,8 +8,7 @@ from __future__ import annotations
 import importlib
 import logging
 import os
-import sys
-from typing import Any, Callable
+from typing import Callable
 
 from craft.config import CONFIG_DIR
 

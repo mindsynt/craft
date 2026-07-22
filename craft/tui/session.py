@@ -4,14 +4,13 @@
 
 from __future__ import annotations
 
-import asyncio
 import os
 import subprocess
 
 from textual import work
 from textual.containers import Horizontal, Vertical
 from textual.screen import Screen
-from textual.widgets import Footer, Header, Input, RichLog, Static, ListView, ListItem, Label
+from textual.widgets import Footer, Header, Input, RichLog, Static, Label
 
 from craft import __version__
 from craft.core.agent import agents
@@ -20,7 +19,6 @@ from craft.core.memory import memory
 from craft.core.session import sessions, Session
 from craft.core.tools import registry as tool_registry
 from craft.core.task import tasks as task_mgr
-from craft.tui.i18n import i18n
 from craft.tui.prompt import PromptInput
 
 
@@ -63,7 +61,7 @@ class SessionScreen(Screen):
 
             with Vertical(id="main-area"):
                 with Horizontal(id="toolbar", classes="border"):
-                    yield Static(f"[bold]对话[/]", classes="panel-title")
+                    yield Static("[bold]对话[/]", classes="panel-title")
                     yield Static(f"[dim]  {self._current_agent} | {self._current_model}[/]", classes="status")
                 self._chat_log = RichLog(id="chat-log", highlight=True, markup=True, wrap=True)
                 yield self._chat_log
@@ -75,8 +73,8 @@ class SessionScreen(Screen):
         yield Footer()
 
     def on_mount(self):
-        self._chat_log.write(f"[bold blue]Craft — AI 编程助手[/]")
-        self._chat_log.write(f"[dim]欢迎使用！输入 /help 查看命令[/]")
+        self._chat_log.write("[bold blue]Craft — AI 编程助手[/]")
+        self._chat_log.write("[dim]欢迎使用！输入 /help 查看命令[/]")
         self._chat_log.write("─" * 50)
         self._session = sessions.create()
         self._input.focus()
@@ -88,7 +86,7 @@ class SessionScreen(Screen):
         self._session = sessions.create()
         self._messages = []
         self._chat_log.clear()
-        self._chat_log.write(f"[bold]新建对话[/]")
+        self._chat_log.write("[bold]新建对话[/]")
         self._session_info.update("  0 条消息")
         self._input.focus()
 

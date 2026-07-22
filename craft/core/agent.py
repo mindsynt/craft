@@ -6,7 +6,6 @@ Agent 系统 — 移植自 MiMo-Code packages/opencode/src/agent/
 from __future__ import annotations
 
 import logging
-from typing import Any
 from pydantic import BaseModel, Field
 from craft.core.permission import Ruleset, merge_rulesets
 

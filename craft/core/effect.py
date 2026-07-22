@@ -5,7 +5,6 @@ Effect-TS 的 Python 等价模式
 
 from __future__ import annotations
 
-import asyncio
 from typing import Any, Callable, TypeVar
 
 T = TypeVar("T")

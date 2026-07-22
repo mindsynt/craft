@@ -395,7 +395,7 @@ def account_login(email: str, password: str = ""):
     if a:
         typer.echo(f"  ✅ 登录成功: {a.name}")
     else:
-        typer.echo(f"  ❌ 登录失败")
+        typer.echo("  ❌ 登录失败")
 
 @account_app.command("logout")
 def account_logout():
@@ -410,7 +410,7 @@ def account_switch(email: str):
     if a:
         typer.echo(f"  ✅ 已切换到: {a.name}")
     else:
-        typer.echo(f"  ❌ 账户不存在")
+        typer.echo("  ❌ 账户不存在")
 
 # ─── theme 子命令 ────────────────────────────────────
 @theme_app.command("list")
@@ -433,7 +433,6 @@ def theme_set(name: str):
         typer.echo(f"  ❌ 可用主题: {available}")
 
 # ─── workspace 子命令 ────────────────────────────────
-from craft.core.project import Project
 
 @workspace_app.command("create")
 def workspace_create(name: str, path: str = "."):
@@ -459,7 +458,6 @@ def workspace_switch(name: str):
         typer.echo(f"  ❌ 工作区不存在: {name}")
 
 # ─── skill 子命令 ────────────────────────────────────
-from craft.core.skill import skills
 
 @skill_app.command("show")
 def skill_show(name: str):

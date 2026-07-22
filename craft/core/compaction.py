@@ -5,9 +5,6 @@
 
 from __future__ import annotations
 
-import json
-import time
-from typing import Any
 
 COMPACTION_THRESHOLD = 8000  # token
 RESERVED_TOKENS = 2000

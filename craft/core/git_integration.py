@@ -6,7 +6,6 @@ Git 操作、diff、commit、branch 管理
 from __future__ import annotations
 
 import subprocess
-from typing import Any
 
 
 class GitError(Exception):

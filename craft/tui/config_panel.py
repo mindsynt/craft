@@ -6,13 +6,8 @@ tui.json 配置、迁移、模式设置
 from __future__ import annotations
 
 import json
-from pathlib import Path
-from typing import Any
 
-from textual.containers import Vertical, VerticalScroll
-from textual.widgets import Label, Select, Static
 from craft.config import CONFIG_DIR
-from craft.tui.theme import THEMES
 from craft.tui.i18n import i18n
 
 

@@ -6,17 +6,12 @@
 from __future__ import annotations
 
 import os
-import re
 import time
-import uuid
 from collections import Counter
-from pathlib import Path
-from typing import Any, Callable
 
-from textual import work
 from textual.containers import Horizontal, Vertical
 from textual.message import Message
-from textual.widgets import Input, Static, RichLog
+from textual.widgets import Input, Static
 
 
 # ─── 频率排序 (移植 frecency.ts) ──────────────────────

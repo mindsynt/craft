@@ -4,7 +4,7 @@ Craft TUI — 精简可用的版本
 
 from __future__ import annotations
 
-from textual.app import App, ComposeResult
+from textual.app import App
 from textual.containers import Horizontal, Vertical
 from textual.widgets import Footer, Header, Input, RichLog, Static, ListView, ListItem
 from craft import __version__
@@ -41,7 +41,7 @@ class ChatScreen(Vertical):
         elif text.startswith("/exit"):
             self.app.exit()
         else:
-            self._log.write(f"[dim]Craft[/]: 收到消息（需要配置 API Key 才能回复）")
+            self._log.write("[dim]Craft[/]: 收到消息（需要配置 API Key 才能回复）")
 
 
 class CraftTUI(App):

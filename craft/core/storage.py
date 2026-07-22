@@ -5,12 +5,9 @@ SQLite 数据库管理、迁移、查询
 
 from __future__ import annotations
 
-import json
-import os
 import sqlite3
 import time
 from pathlib import Path
-from typing import Any
 
 from craft.config import CONFIG_DIR
 

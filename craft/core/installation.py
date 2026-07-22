@@ -5,11 +5,8 @@
 
 from __future__ import annotations
 
-import json
 import os
-import subprocess
 from pathlib import Path
-from typing import Any
 
 from craft import __version__
 from craft.config import CONFIG_DIR

@@ -5,13 +5,10 @@ VS Code / Cursor / Windsurf 编辑器协议支持
 
 from __future__ import annotations
 
-import json
 import logging
-import os
 import subprocess
 import tempfile
 from pathlib import Path
-from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -57,7 +54,7 @@ class IDEManager:
     def open_file(self, filepath: str, line: int = 1, ide: str | None = None) -> bool:
         ide = ide or self._preferred
         if not ide or ide not in SUPPORTED_IDES:
-            logger.warning(f"[IDE] 未找到可用编辑器")
+            logger.warning("[IDE] 未找到可用编辑器")
             return False
         info = SUPPORTED_IDES[ide]
         cmd = [info["cmd"]]

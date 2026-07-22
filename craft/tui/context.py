@@ -6,11 +6,7 @@
 from __future__ import annotations
 
 import json
-import time
-from pathlib import Path
-from typing import Any
 
-from textual import work
 from textual.widgets import Static
 
 from craft.config import CONFIG_DIR

@@ -5,7 +5,6 @@ ultra/standard/lite 分级模型组
 
 from __future__ import annotations
 
-from typing import Any
 
 
 MODEL_GROUPS: dict[str, dict] = {

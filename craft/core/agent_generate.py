@@ -5,8 +5,7 @@ Agent 自动生成 — 移植自 agent->generate.txt
 
 from __future__ import annotations
 
-from typing import Any
-from craft.core.agent import agents, AgentInfo, AgentRegistry
+from craft.core.agent import agents, AgentInfo
 from craft.core.permission import Ruleset
 
 

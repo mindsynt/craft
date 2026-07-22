@@ -5,7 +5,6 @@ CLI 命令注册、参数解析、帮助生成
 
 from __future__ import annotations
 
-import inspect
 from typing import Any, Callable
 
 

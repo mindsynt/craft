@@ -5,10 +5,9 @@ feature-plugins: home/sidebar/system 三个插槽
 
 from __future__ import annotations
 
-from typing import Any, Callable
 
 from textual.containers import Vertical
-from textual.widgets import Button, Label, Static
+from textual.widgets import Label, Static
 from craft.core.plugin import plugin_manager
 
 

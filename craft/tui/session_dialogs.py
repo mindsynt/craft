@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from textual.containers import Horizontal, Vertical
 from textual.screen import ModalScreen
-from textual.widgets import Button, Input, Label, Static, ListView, ListItem
+from textual.widgets import Button, Input, Label, Static
 
 
 class ForkDialog(ModalScreen[dict | None]):
@@ -49,7 +49,7 @@ class MessageDialog(ModalScreen[dict | None]):
 class FooterWidget(Horizontal):
     """会话页脚 (移植 routes/session/footer.tsx)"""
     def compose(self):
-        yield Label(f"  Agent: [yellow]build[/]")
-        yield Label(f"  模型: [green]gpt-4o[/]")
-        yield Label(f"  消息: [cyan]0[/]")
-        yield Label(f"  Tab补全  ↑↓历史  /help命令", classes="status")
+        yield Label("  Agent: [yellow]build[/]")
+        yield Label("  模型: [green]gpt-4o[/]")
+        yield Label("  消息: [cyan]0[/]")
+        yield Label("  Tab补全  ↑↓历史  /help命令", classes="status")

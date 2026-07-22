@@ -8,9 +8,6 @@ from __future__ import annotations
 import asyncio
 import itertools
 
-from textual import work
-from textual.app import App
-from textual.binding import Binding
 from textual.containers import Horizontal, Vertical
 from textual.screen import ModalScreen
 from textual.widgets import Button, Input, Label, ListView, ListItem, RichLog, Static

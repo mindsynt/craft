@@ -8,10 +8,9 @@ from __future__ import annotations
 import os
 import time
 from pathlib import Path
-from typing import Any
 
-from textual.containers import Vertical, VerticalScroll
-from textual.widgets import Label, Static, ListView, ListItem, Tree
+from textual.containers import Vertical
+from textual.widgets import Label, Static, Tree
 
 
 # ─── 文件树面板 ──────────────────────────────────────

@@ -9,8 +9,6 @@ import json
 import logging
 import time
 import uuid
-from pathlib import Path
-from typing import Any, Callable
 
 from craft.config import CONFIG_DIR
 

@@ -31,9 +31,9 @@ class PermissionRequest(ModalScreen[bool]):
             ListView(
                 ListItem(Label(f"  {r}") for r in [
                     f"允许 {self._tool}",
-                    f"单次授权",
-                    f"会话内授权",
-                    f"始终允许",
+                    "单次授权",
+                    "会话内授权",
+                    "始终允许",
                 ]),
                 id="perm-rules",
             ),

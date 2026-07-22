@@ -9,9 +9,9 @@ import asyncio
 import logging
 import time
 import uuid
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timedelta
-from typing import Any, Callable, Coroutine
+from typing import Callable
 
 logger = logging.getLogger(__name__)
 

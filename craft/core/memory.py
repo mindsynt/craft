@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-import os, sqlite3, time, uuid
+import sqlite3
+import time
+import uuid
 from pathlib import Path
 from craft.config import CONFIG_DIR
 

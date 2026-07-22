@@ -5,9 +5,7 @@ Slack 消息收发、命令处理、对话同步
 
 from __future__ import annotations
 
-import json
 import logging
-from typing import Any
 
 logger = logging.getLogger(__name__)
 

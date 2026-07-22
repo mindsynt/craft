@@ -3,7 +3,7 @@
 """
 
 from __future__ import annotations
-from textual.containers import Vertical, VerticalScroll
+from textual.containers import VerticalScroll
 from textual.widgets import Label, Static
 from craft.core.session import sessions
 
