@@ -1,0 +1,25 @@
+[project]
+name = "craft"
+version = "0.1.0"
+description = "Python port of MiMo-Code (OpenCode)"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    "httpx>=0.27.0",
+    "rich>=13.0",
+    "click>=8.0",
+    "python-dotenv>=1.0",
+    "pyyaml>=6.0",
+]
+
+[project.scripts]
+craft = "craft.cli:app"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["craft"]
+include = ["craft*"]
