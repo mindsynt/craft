@@ -73,6 +73,27 @@ from .lsp import lsp
 # Glob re-export as 'glob' to match original name
 glob = glob_fn
 
+from .skill_content import render_skill_content
+from .read_state import assert_file_read
+from .invocation_style import resolve_invocation_style, InvocationStyle
+from .bash_token_efficient import clean, clean_bash_output, create_pipeline, default_plugins, make_clean_result
+from .shell_tokenize import tokenize, tokenize_safe, Argv, ParseError
+from .shell_wrap import shell_wrap
+from .fleet import (
+    FleetSession, WorktreeEntry, FleetRow, FleetSummary,
+    FleetActorInput, assemble_fleet, render_fleet_table,
+)
+from .memory_path_guard import (
+    assert_memory_write_allowed,
+    assert_agent_write_sandbox,
+)
+from .external_directory import (
+    assert_external_directory,
+    assert_memory_write_allowed as ext_assert_memory_write_allowed,
+    assert_agent_write_sandbox as ext_assert_agent_write_sandbox,
+    ask_edit_unless_memory,
+)
+
 # Import submodules so they're accessible as attributes
 from . import read as _read_mod
 from . import write as _write_mod
@@ -97,6 +118,15 @@ from . import skill as _skill_mod
 from . import invalid as _invalid_mod
 from . import actor as _actor_mod
 from . import lsp as _lsp_mod
+from . import read_state as _read_state_mod
+from . import invocation_style as _invocation_style_mod
+from . import bash_token_efficient as _bash_token_efficient_mod
+from . import shell_tokenize as _shell_tokenize_mod
+from . import shell_wrap as _shell_wrap_mod
+from . import skill_content as _skill_content_mod
+from . import fleet as _fleet_mod
+from . import memory_path_guard as _memory_path_guard_mod
+from . import external_directory as _external_directory_mod
 
 __all__ = [
     # Core types
@@ -123,4 +153,15 @@ __all__ = [
     "SESSION_PARAMETERS",
     # Read helpers
     "_read_file_with_lines",
+    # New modules
+    "assert_file_read",
+    "resolve_invocation_style", "InvocationStyle",
+    "clean", "clean_bash_output", "create_pipeline", "default_plugins", "make_clean_result",
+    "tokenize", "tokenize_safe", "Argv", "ParseError",
+    "shell_wrap",
+    "render_skill_content",
+    "FleetSession", "WorktreeEntry", "FleetRow", "FleetSummary",
+    "FleetActorInput", "assemble_fleet", "render_fleet_table",
+    "assert_memory_write_allowed", "assert_agent_write_sandbox",
+    "assert_external_directory", "ask_edit_unless_memory",
 ]
