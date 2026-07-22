@@ -1,6 +1,5 @@
-"""
-账户系统 — 移植自 packages/opencode/src/account/
-多账户管理、组织/工作空间、账户切换
+"""账户系统 - 移植自 packages/opencode/src/account/
+多账户管理、组织/工作空间、账户切换、URL 工具
 """
 
 from __future__ import annotations
@@ -10,6 +9,7 @@ import time
 import uuid
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse, urlunparse
 
 from craft.config import CONFIG_DIR
 
@@ -122,3 +122,17 @@ class AccountManager:
 
 
 accounts = AccountManager()
+
+
+def normalize_server_url(url: str) -> str:
+    """规范化服务端 URL
+
+    对应 TS normalizeServerUrl() (url.ts)。
+    去除查询参数、哈希和尾部斜杠。
+    """
+    parsed = urlparse(url)
+    cleaned = parsed._replace(query="", fragment="")
+    pathname = cleaned.path.rstrip("/")
+    if not pathname:
+        return urlunparse((cleaned.scheme, cleaned.netloc, "", "", "", ""))
+    return urlunparse((cleaned.scheme, cleaned.netloc, pathname, "", "", ""))

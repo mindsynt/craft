@@ -1,12 +1,14 @@
 """
-分享系统 — 移植自 packages/opencode/src/share/
-会话分享、导出、导入
+分享系统 - 移植自 packages/opencode/src/share/
+会话分享、导出、导入、ShareNext 同步
 """
 
 from __future__ import annotations
 
 import time
 import uuid
+from dataclasses import dataclass, field
+from typing import Any
 
 from craft.core.session import sessions
 
@@ -65,3 +67,42 @@ class ShareManager:
 
 
 share_manager = ShareManager()
+
+
+# ── ShareNext (对应 share-next.ts) ──────────────────────────
+
+# 是否禁用分享功能
+SHARE_DISABLED = False
+
+
+@dataclass
+class ShareNextApi:
+    """ShareNext API 路由"""
+    create: str = "/api/shares"
+    sync: str = "/api/shares/{share_id}/sync"
+    remove: str = "/api/shares/{share_id}"
+    data: str = "/api/shares/{share_id}/data"
+
+
+@dataclass
+class ShareNextReq:
+    """ShareNext 请求配置"""
+    headers: dict[str, str] = field(default_factory=dict)
+    api: ShareNextApi = field(default_factory=ShareNextApi)
+    base_url: str = "https://opncd.ai"
+
+
+@dataclass
+class ShareNextData:
+    """ShareNext 同步数据类型"""
+    type: str  # "session" | "message" | "part" | "session_diff" | "model"
+    data: Any = None
+
+
+@dataclass
+class ShareInfo:
+    """分享信息"""
+    id: str = ""
+    url: str = ""
+    secret: str = ""
+

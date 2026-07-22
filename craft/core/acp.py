@@ -1,12 +1,34 @@
-"""
-ACP 协议 — 移植自 packages/opencode/src/acp/
-Agent 间通信协议
+"""ACP 协议 - 移植自 packages/opencode/src/acp/
+Agent 间通信协议 (Agent Communication Protocol)
 """
 
 from __future__ import annotations
 
 import json
 import uuid
+from dataclasses import dataclass, field
+from typing import Any
+
+
+@dataclass
+class ACPSessionState:
+    """ACP 会话状态 - 对应 acp/types.ts ACPSessionState"""
+    id: str
+    cwd: str
+    mcp_servers: list[dict] = field(default_factory=list)
+    created_at: float = 0.0
+    model_provider_id: str | None = None
+    model_id: str | None = None
+    variant: str | None = None
+    mode_id: str | None = None
+
+
+@dataclass
+class ACPConfig:
+    """ACP 配置 - 对应 acp/types.ts ACPConfig"""
+    sdk: Any = None
+    default_model_provider_id: str | None = None
+    default_model_id: str | None = None
 
 
 class AgentMessage:
