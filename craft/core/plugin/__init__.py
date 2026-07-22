@@ -100,6 +100,10 @@ from .hook_plugins import (
     make_subagent_progress_checker_plugin,
     make_checkpoint_splitover_plugin,
 )
+from .debug_workspace import (
+    DebugWorkspacePlugin,
+    make_debug_workspace_plugin,
+)
 
 __all__ = [
     "PluginManager",
@@ -161,4 +165,6 @@ __all__ = [
     "make_copilot_auth_plugin",
     "make_subagent_progress_checker_plugin",
     "make_checkpoint_splitover_plugin",
+    "DebugWorkspacePlugin",
+    "make_debug_workspace_plugin",
 ]

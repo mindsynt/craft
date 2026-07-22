@@ -275,6 +275,74 @@ def search_skills(query: str, skills: list[SkillInfo]) -> list[SearchResult]:
 
 
 # ═══════════════════════════════════════════════════════════
+# Skill Discovery — 远程拉取（port of discovery.ts pull）
+# ═══════════════════════════════════════════════════════════
+
+
+def discovery_pull(url: str, cache_dir: str | Path | None = None) -> list[str]:
+    """Pull skills from a remote registry.
+
+    Ported from MiMo-Code discovery.ts: pulls an index.json from the remote
+    URL and downloads each skill's files to a local cache directory.
+
+    Args:
+        url: Base URL of the skill registry (e.g. "https://skills.example.com/").
+        cache_dir: Local cache directory. Defaults to CONFIG_DIR / "skills_cache".
+
+    Returns:
+        List of local directory paths containing pulled skills.
+    """
+    import json
+    import urllib.request
+
+    if cache_dir is None:
+        cache_dir = CONFIG_DIR / "skills_cache"
+    else:
+        cache_dir = Path(cache_dir)
+
+    base = url.rstrip("/")
+    index_url = f"{base}/index.json"
+    result_dirs: list[str] = []
+
+    try:
+        req = urllib.request.Request(index_url)
+        req.add_header("Accept", "application/json")
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            data = json.loads(resp.read().decode())
+    except Exception as e:
+        logger.warning("Failed to fetch skill index from %s: %s", index_url, e)
+        return []
+
+    skills = data.get("skills", [])
+    for skill in skills:
+        name = skill.get("name", "")
+        files = skill.get("files", [])
+        if "SKILL.md" not in files:
+            logger.warning("Skill entry missing SKILL.md: %s", name)
+            continue
+
+        skill_dir = cache_dir / name
+        skill_dir.mkdir(parents=True, exist_ok=True)
+
+        for rel_path in files:
+            file_url = f"{base}/{name}/{rel_path}"
+            dest = skill_dir / rel_path
+            if dest.exists():
+                continue
+            try:
+                with urllib.request.urlopen(file_url, timeout=10) as f:
+                    dest.parent.mkdir(parents=True, exist_ok=True)
+                    dest.write_bytes(f.read())
+            except Exception as e:
+                logger.error("Failed to download skill file: %s: %s", file_url, e)
+
+        if (skill_dir / "SKILL.md").exists():
+            result_dirs.append(str(skill_dir))
+
+    return result_dirs
+
+
+# ═══════════════════════════════════════════════════════════
 # Skill Discovery — 磁盘扫描与加载
 # ═══════════════════════════════════════════════════════════
 
@@ -347,11 +415,104 @@ def parse_markdown_skill(file_path: str) -> SkillInfo | None:
 
 
 # ═══════════════════════════════════════════════════════════
-# Builtin / Compose Bundle extraction
+# Builtin / Compose Bundle extraction + Document skill matching
 # ═══════════════════════════════════════════════════════════
 
 BUILTIN_SKILL_DIR = CONFIG_DIR / "builtin_skills"
 COMPOSE_SKILL_DIR = CONFIG_DIR / "compose_skills"
+
+# Official skill names that can be disabled via flag
+OFFICIAL_SKILL_NAMES: set[str] = {
+    "docx-official",
+    "pdf-official",
+    "pptx-official",
+    "xlsx-official",
+    "html-to-video-pipeline",
+}
+
+# Required CLI commands for certain builtin skills
+_REQUIRED_COMMANDS: dict[str, str] = {
+    "claude-code": "claude",
+    "codex": "codex",
+}
+
+
+def is_builtin_skill_installed(name: str) -> bool:
+    """Check if a builtin skill's required command is available."""
+    command = _REQUIRED_COMMANDS.get(name)
+    if not command:
+        return True
+    return _which(command) is not None
+
+
+# Document skill triggers — mime type + filename pattern matching
+_DOCUMENT_SKILL_TRIGGERS: list[dict[str, Any]] = [
+    {
+        "skill": "pdf-official",
+        "mimes": ["application/pdf"],
+        "filename_re": r"\.pdf$",
+    },
+    {
+        "skill": "docx-official",
+        "mimes": [
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.template",
+            "application/msword",
+        ],
+        "filename_re": r"\.(docx|dotx)$",
+    },
+    {
+        "skill": "xlsx-official",
+        "mimes": [
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.template",
+            "application/vnd.ms-excel",
+            "application/vnd.ms-excel.sheet.macroenabled.12",
+            "text/csv",
+            "text/tab-separated-values",
+        ],
+        "filename_re": r"\.(xlsx|xlsm|xltx|csv|tsv)$",
+    },
+    {
+        "skill": "pptx-official",
+        "mimes": [
+            "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+            "application/vnd.ms-powerpoint",
+        ],
+        "filename_re": r"\.pptx$",
+    },
+]
+
+
+def match_document_skills(candidates: list[dict[str, str | None]]) -> list[str]:
+    """Match document skill names from candidate file metadata.
+
+    Args:
+        candidates: List of dicts with optional 'mime' and 'filename' keys.
+
+    Returns:
+        Sorted list of matching skill names (e.g. ["pdf-official", "docx-official"]).
+    """
+    hits: set[str] = set()
+    for candidate in candidates:
+        mime = candidate.get("mime")
+        filename = candidate.get("filename")
+        for trigger in _DOCUMENT_SKILL_TRIGGERS:
+            if mime and mime in trigger["mimes"]:
+                hits.add(trigger["skill"])
+                continue
+            if filename and re.search(trigger["filename_re"], filename, re.IGNORECASE):
+                hits.add(trigger["skill"])
+    return [t["skill"] for t in _DOCUMENT_SKILL_TRIGGERS if t["skill"] in hits]
+
+
+def _which(command: str) -> str | None:
+    """Check if a command is available on PATH. Returns path or None."""
+    try:
+        import shutil
+        return shutil.which(command)
+    except Exception:
+        return None
 
 
 def extract_builtin_bundle() -> str | None:
