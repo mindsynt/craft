@@ -1,0 +1,245 @@
+{
+  "timestamp": 1784677660.1747022,
+  "total": 39,
+  "passed": 39,
+  "failed": 0,
+  "pass_rate": 100.0,
+  "all_pass": true,
+  "blockers": [],
+  "results": [
+    {
+      "category": "模块",
+      "name": "加载通过率 67/67",
+      "pass": true,
+      "detail": "67/67"
+    },
+    {
+      "category": "CLI",
+      "name": "命令完整性",
+      "pass": true,
+      "detail": "20个全在"
+    },
+    {
+      "category": "CLI",
+      "name": "子命令组: agent",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "CLI",
+      "name": "子命令组: config",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "CLI",
+      "name": "子命令组: session",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "CLI",
+      "name": "子命令组: memory",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "CLI",
+      "name": "子命令组: task",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "CLI",
+      "name": "子命令组: skill",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "CLI",
+      "name": "子命令组: account",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "功能",
+      "name": "Agent预置",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "功能",
+      "name": "Agent权限",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "功能",
+      "name": "Agent只读",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "功能",
+      "name": "记忆添加",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "功能",
+      "name": "记忆搜索",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "功能",
+      "name": "会话消息",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "功能",
+      "name": "工具注册",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "功能",
+      "name": "事件总线",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "功能",
+      "name": "任务创建",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "功能",
+      "name": "任务完成",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "功能",
+      "name": "账户创建",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "功能",
+      "name": "通知创建",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "功能",
+      "name": "技能预置",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "功能",
+      "name": "格式化",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "功能",
+      "name": "Effect",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "功能",
+      "name": "文件操作",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "TUI",
+      "name": "主题系统",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "TUI",
+      "name": "多语言",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "TUI",
+      "name": "输入补全",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "TUI",
+      "name": "输入历史",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "TUI",
+      "name": "快捷键",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "TUI",
+      "name": "历史记录",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "缺失",
+      "name": "记忆自动注入",
+      "pass": true,
+      "detail": "自动注入功能"
+    },
+    {
+      "category": "缺失",
+      "name": "上下文压缩",
+      "pass": true,
+      "detail": "长对话自动压缩"
+    },
+    {
+      "category": "缺失",
+      "name": "语音输入",
+      "pass": true,
+      "detail": "语音转文字"
+    },
+    {
+      "category": "缺失",
+      "name": "剪贴板",
+      "pass": true,
+      "detail": "复制粘贴增强"
+    },
+    {
+      "category": "缺失",
+      "name": "Agent自动生成",
+      "pass": true,
+      "detail": "prompt生成新Agent"
+    },
+    {
+      "category": "缺失",
+      "name": "模型分组",
+      "pass": true,
+      "detail": "ultra/standard/lite"
+    },
+    {
+      "category": "缺失",
+      "name": "声音效果",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "category": "缺失",
+      "name": "星空背景",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

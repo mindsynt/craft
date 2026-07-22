@@ -1,0 +1,176 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "CLI: account 命令 - 登录/登出/切换账户",
+      "description": "🎨 UI设计师: 设计账户交互界面\n💻 全栈开发1: 实现 account 子命令 (login/logout/switch/list)\n👀 Review1: 审查实现\n🧪 测试1: 测试账户流程",
+      "assignee": "💻 全栈开发1",
+      "priority": "H",
+      "status": "✅ Done",
+      "created": 1784677541.879366
+    },
+    {
+      "id": 2,
+      "title": "CLI: provider 配置命令",
+      "description": "💻 全栈开发2: 实现 provider 子命令 (set/get/list/delete)\n👀 Review1: 审查\n🧪 测试1: 测试",
+      "assignee": "💻 全栈开发2",
+      "priority": "H",
+      "status": "✅ Done",
+      "created": 1784677541.8793678
+    },
+    {
+      "id": 3,
+      "title": "CLI: mcp 管理命令",
+      "description": "💻 全栈开发3: 实现 mcp 子命令 (connect/disconnect/list)\n👀 Review2: 审查\n🧪 测试2: 测试",
+      "assignee": "💻 全栈开发3",
+      "priority": "H",
+      "status": "✅ Done",
+      "created": 1784677541.879369
+    },
+    {
+      "id": 4,
+      "title": "CLI: skill 管理命令",
+      "description": "💻 全栈开发1: 实现 skill 子命令 (list/show/run)\n👀 Review1: 审查\n🧪 测试1: 测试",
+      "assignee": "💻 全栈开发1",
+      "priority": "H",
+      "status": "✅ Done",
+      "created": 1784677541.879369
+    },
+    {
+      "id": 5,
+      "title": "CLI: plugin 管理命令",
+      "description": "💻 全栈开发2: 实现 plug 子命令 (install/list/remove)\n👀 Review2: 审查\n🧪 测试2: 测试",
+      "assignee": "💻 全栈开发2",
+      "priority": "M",
+      "status": "✅ Done",
+      "created": 1784677541.8793721
+    },
+    {
+      "id": 6,
+      "title": "CLI: theme 切换命令",
+      "description": "💻 全栈开发3: 实现 theme 子命令 (list/set)\n👀 Review1: 审查\n🧪 测试3: 测试",
+      "assignee": "💻 全栈开发3",
+      "priority": "M",
+      "status": "✅ Done",
+      "created": 1784677541.879373
+    },
+    {
+      "id": 7,
+      "title": "CLI: workspace 管理命令",
+      "description": "💻 全栈开发1: 实现 workspace 子命令 (create/list/switch)\n👀 Review2: 审查\n🧪 测试3: 测试",
+      "assignee": "💻 全栈开发1",
+      "priority": "M",
+      "status": "✅ Done",
+      "created": 1784677541.879374
+    },
+    {
+      "id": 8,
+      "title": "TUI: 文件树面板",
+      "description": "🎨 UI设计师: 设计文件树交互\n💻 全栈开发2: 实现 FileTreePanel (浏览/选择/搜索)\n👀 Review1: 审查\n🧪 测试2: 测试",
+      "assignee": "💻 全栈开发2",
+      "priority": "H",
+      "status": "✅ Done",
+      "created": 1784677541.8793778
+    },
+    {
+      "id": 9,
+      "title": "TUI: LSP 状态面板",
+      "description": "💻 全栈开发3: 实现 LSPStatusPanel (语言服务器状态)\n👀 Review1: 审查\n🧪 测试3: 测试",
+      "assignee": "💻 全栈开发3",
+      "priority": "H",
+      "status": "✅ Done",
+      "created": 1784677541.87938
+    },
+    {
+      "id": 10,
+      "title": "TUI: MCP 状态面板",
+      "description": "💻 全栈开发1: 实现 MCPStatusPanel (连接状态/管理)\n👀 Review2: 审查\n🧪 测试1: 测试",
+      "assignee": "💻 全栈开发1",
+      "priority": "H",
+      "status": "✅ Done",
+      "created": 1784677541.87938
+    },
+    {
+      "id": 11,
+      "title": "TUI: TPS 速度面板",
+      "description": "💻 全栈开发2: 实现 TPSPanel (Token/秒实时显示)\n👀 Review1: 审查\n🧪 测试2: 测试",
+      "assignee": "💻 全栈开发2",
+      "priority": "M",
+      "status": "✅ Done",
+      "created": 1784677541.879381
+    },
+    {
+      "id": 12,
+      "title": "TUI: 任务面板",
+      "description": "💻 全栈开发3: 实现 TaskPanel (任务列表/状态)\n👀 Review2: 审查\n🧪 测试3: 测试",
+      "assignee": "💻 全栈开发3",
+      "priority": "M",
+      "status": "✅ Done",
+      "created": 1784677541.8793821
+    },
+    {
+      "id": 13,
+      "title": "TUI: 权限请求界面",
+      "description": "🎨 UI设计师: 设计权限弹窗\n💻 全栈开发1: 实现 PermissionRequest (允许/拒绝/规则)\n👀 Review1: 审查\n🧪 测试1: 测试",
+      "assignee": "💻 全栈开发1",
+      "priority": "H",
+      "status": "✅ Done",
+      "created": 1784677541.8793821
+    },
+    {
+      "id": 14,
+      "title": "TUI: 子代理界面",
+      "description": "💻 全栈开发2: 实现 SubagentDialog (创建/管理子代理)\n👀 Review2: 审查\n🧪 测试2: 测试",
+      "assignee": "💻 全栈开发2",
+      "priority": "M",
+      "status": "✅ Done",
+      "created": 1784677541.879383
+    },
+    {
+      "id": 15,
+      "title": "TUI: 命令面板",
+      "description": "💻 全栈开发3: 实现 CommandPalette (/搜索命令)\n👀 Review1: 审查\n🧪 测试3: 测试",
+      "assignee": "💻 全栈开发3",
+      "priority": "M",
+      "status": "✅ Done",
+      "created": 1784677541.879384
+    },
+    {
+      "id": 16,
+      "title": "TUI: 提供商配置对话框",
+      "description": "🎨 UI设计师: 设计提供商配置表单\n💻 全栈开发1: 实现 ProviderDialog (API Key/BU/模型)\n👀 Review2: 审查\n🧪 测试1: 测试",
+      "assignee": "💻 全栈开发1",
+      "priority": "H",
+      "status": "✅ Done",
+      "created": 1784677541.879384
+    },
+    {
+      "id": 17,
+      "title": "TUI: 首页视图",
+      "description": "🎨 UI设计师: 设计首页布局\n💻 全栈开发2: 实现 HomeView (最近会话/快捷操作)\n👀 Review1: 审查\n🧪 测试2: 测试",
+      "assignee": "💻 全栈开发2",
+      "priority": "M",
+      "status": "✅ Done",
+      "created": 1784677541.879385
+    },
+    {
+      "id": 18,
+      "title": "TUI: 侧栏面板集成到 Session",
+      "description": "💻 全栈开发3: 将全部侧栏面板整合到主界面\n👀 Review2: 审查\n🧪 测试3: 测试",
+      "assignee": "💻 全栈开发3",
+      "priority": "H",
+      "status": "✅ Done",
+      "created": 1784677541.879385
+    },
+    {
+      "id": 19,
+      "title": "回归: monitor.py + audit.py 全量通过",
+      "description": "🧪 测试1/2/3: 全量回归测试\n👀 Review1/2: 最终审查\n🛠️ 打杂: 整理报告",
+      "assignee": "🧪 测试1",
+      "priority": "M",
+      "status": "✅ Done",
+      "created": 1784677541.8793862
+    }
+  ],
+  "next_id": 20
+}
